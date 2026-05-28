@@ -1,0 +1,33 @@
+name: Update Configs
+
+on:
+  schedule:
+    - cron: '0 */12 * * *' # این یعنی هر ۱۲ ساعت یک‌بار اجرا بشه
+  workflow_dispatch: # این اجازه میده دستی هم اجراش کنی
+
+jobs:
+  run-scraper:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: pip install requests
+
+      - name: Run Scraper
+        run: python scraper.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'actions@github.com'
+          git add configs.txt
+          git commit -m "Auto-update configs" || exit 0
+          git push
