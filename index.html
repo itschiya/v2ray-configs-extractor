@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>داشبورد کانفیگ‌های V2Ray</title>
-    <!-- لود کردن فونت زیبای وزیرمتن به عنوان جایگزین استاندارد -->
+    
+    <!-- لود مطمئن فونت وزیرمتن -->
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v3.3.0/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -15,28 +16,32 @@
             --card-border: rgba(255, 255, 255, 0.05);
             --accent-primary: #00f0ff; /* سایبرپانک آبی */
             --accent-secondary: #ff003c; /* سایبرپانک قرمز */
+            --accent-tertiary: #b070ff; /* بنفش نئونی */
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --success: #10b981;
+            --warning: #f59e0b;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Yekan Bakh', 'Vazirmatn', sans-serif;
+            /* تثبیت فونت وزیرمتن برای همه دیوایس‌ها */
+            font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
             background-color: var(--bg-color);
             background-image: 
-                radial-gradient(at 0% 0%, rgba(0, 240, 255, 0.1) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(255, 0, 60, 0.1) 0px, transparent 50%);
+                radial-gradient(circle at 15% 50%, rgba(0, 240, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(176, 112, 255, 0.05) 0%, transparent 50%);
             background-attachment: fixed;
             color: var(--text-main);
             min-height: 100vh;
             padding: 2rem;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .container {
@@ -44,33 +49,81 @@
             margin: 0 auto;
         }
 
-        /* هدر سایت */
+        /* هدر و کنترل‌ها */
         header {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .header-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 3rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--card-border);
             flex-wrap: wrap;
             gap: 1rem;
         }
 
         .title-section h1 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            background: linear-gradient(90deg, var(--accent-primary), #b070ff);
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
         }
 
         .title-section p {
             color: var(--text-muted);
-            font-size: 1rem;
+            font-size: 1.1rem;
         }
 
-        /* دکمه سابسکریپشن */
+        .controls {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .control-group label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        select {
+            background: var(--card-bg);
+            color: var(--text-main);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            padding: 0.6rem 2rem 0.6rem 1rem;
+            border-radius: 8px;
+            outline: none;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300f0ff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: left 0.7rem top 50%;
+            background-size: 0.65rem auto;
+            transition: all 0.3s;
+        }
+
+        select:hover, select:focus {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+        }
+
         .sub-btn {
             background: rgba(0, 240, 255, 0.1);
             color: var(--accent-primary);
@@ -80,10 +133,10 @@
             font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.8rem;
             box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
         }
 
@@ -91,7 +144,7 @@
             background: var(--accent-primary);
             color: var(--bg-color);
             box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
-            transform: translateY(-2px);
+            transform: translateY(-2px) scale(1.02);
         }
 
         /* شبکه کارت‌ها */
@@ -99,20 +152,29 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 1.5rem;
+            /* برای انیمیشن فیلتر */
+            position: relative; 
+            min-height: 200px;
         }
 
-        /* کارت کانفیگ */
+        /* کارت کانفیگ و انیمیشن ورود */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 16px;
             padding: 1.5rem;
             backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            animation: slideUp 0.5s ease backwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         .card::before {
@@ -128,9 +190,9 @@
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(0, 240, 255, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: translateY(-8px);
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 240, 255, 0.05);
         }
 
         .card:hover::before {
@@ -145,26 +207,32 @@
         }
 
         .badge {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.3rem 0.8rem;
+            padding: 0.4rem 1rem;
             border-radius: 20px;
             font-size: 0.8rem;
-            font-weight: 700;
+            font-weight: 800;
             letter-spacing: 1px;
             text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
-        .badge.vless { background: rgba(0, 240, 255, 0.15); color: var(--accent-primary); }
-        .badge.vmess { background: rgba(176, 112, 255, 0.15); color: #b070ff; }
-        .badge.trojan { background: rgba(255, 0, 60, 0.15); color: var(--accent-secondary); }
+        .badge.vless { background: rgba(0, 240, 255, 0.15); color: var(--accent-primary); border: 1px solid rgba(0,240,255,0.3);}
+        .badge.vmess { background: rgba(176, 112, 255, 0.15); color: var(--accent-tertiary); border: 1px solid rgba(176,112,255,0.3);}
+        .badge.trojan { background: rgba(255, 0, 60, 0.15); color: var(--accent-secondary); border: 1px solid rgba(255,0,60,0.3);}
+        .badge.ss { background: rgba(245, 158, 11, 0.15); color: var(--warning); border: 1px solid rgba(245,158,11,0.3);}
 
         .flag-icon {
-            font-size: 1.8rem;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            font-size: 2rem;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+            transition: transform 0.3s;
+        }
+        
+        .card:hover .flag-icon {
+            transform: scale(1.1) rotate(5deg);
         }
 
         .card-title {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: 700;
             margin-bottom: 1rem;
             white-space: nowrap;
@@ -172,6 +240,7 @@
             text-overflow: ellipsis;
             direction: ltr;
             text-align: right;
+            color: #e2e8f0;
         }
 
         .card-stats {
@@ -186,32 +255,38 @@
         .ping {
             display: flex;
             align-items: center;
-            gap: 0.4rem;
-            font-size: 0.9rem;
-            font-family: monospace;
-            color: var(--success);
+            gap: 0.5rem;
+            font-size: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
         }
 
         .ping-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--success);
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            box-shadow: 0 0 8px var(--success);
             animation: pulse 2s infinite;
         }
 
         .copy-btn {
-            background: none;
-            border: none;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
             color: var(--text-muted);
             cursor: pointer;
-            font-size: 1.2rem;
-            transition: color 0.2s;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
         }
 
         .copy-btn:hover {
-            color: var(--text-main);
+            color: var(--accent-primary);
+            border-color: var(--accent-primary);
+            background: rgba(0,240,255,0.1);
+            transform: scale(1.1);
         }
 
         /* توست (پیغام کپی) */
@@ -220,14 +295,18 @@
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
-            background: var(--accent-primary);
-            color: var(--bg-color);
-            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+            color: #000;
+            padding: 1rem 2.5rem;
             border-radius: 30px;
-            font-weight: 700;
-            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
-            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            font-weight: 800;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.4);
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         #toast.show {
@@ -235,27 +314,38 @@
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
-            70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+            0% { box-shadow: 0 0 0 0 currentColor; opacity: 1;}
+            70% { box-shadow: 0 0 0 8px transparent; opacity: 0.5;}
+            100% { box-shadow: 0 0 0 0 transparent; opacity: 1;}
         }
 
-        /* لودینگ */
-        .loader {
+        /* لودینگ و وضعیت خالی */
+        .loader, .empty-state {
             text-align: center;
-            padding: 3rem;
-            color: var(--accent-primary);
-            font-size: 1.5rem;
+            padding: 4rem;
             grid-column: 1 / -1;
-        }
-
-        .empty-state {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 3rem;
             background: var(--card-bg);
             border-radius: 16px;
             border: 1px dashed var(--card-border);
+        }
+
+        .loader i {
+            color: var(--accent-primary);
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px var(--accent-primary));
+        }
+        
+        .empty-state h3 {
+            color: var(--accent-secondary);
+            font-size: 1.5rem;
+        }
+        
+        /* برای افکت محو شدن هنگام فیلتر */
+        .fade-out {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.3s ease;
         }
     </style>
 </head>
@@ -263,25 +353,55 @@
 
     <div class="container">
         <header>
-            <div class="title-section">
-                <h1>رادار کانفیگ <span>V2Ray</span></h1>
-                <p>لیست کانفیگ‌های استخراج شده با پینگ‌های بهینه‌سازی شده ایشالا :)</p>
+            <div class="header-top">
+                <div class="title-section">
+                    <h1>رادار کانفیگ <span>V2Ray</span></h1>
+                    <p>استخراج هوشمند، فیلترینگ و مرتب‌سازی در لحظه</p>
+                </div>
+                <button class="sub-btn" onclick="copySubscription()">
+                    <i class="fa-solid fa-link"></i>
+                    کپی لینک سابسکریپشن
+                </button>
             </div>
-            <button class="sub-btn" onclick="copySubscription()">
-                <i class="fa-solid fa-link"></i>
-                کپی لینک سابسکریپشن
-            </button>
+            
+            <div class="controls">
+                <div class="control-group">
+                    <label for="filter-type"><i class="fa-solid fa-filter"></i> نوع کانفیگ:</label>
+                    <select id="filter-type" onchange="applyFilters()">
+                        <option value="all">همه پروتکل‌ها</option>
+                        <option value="vless">VLESS</option>
+                        <option value="vmess">VMESS</option>
+                        <option value="trojan">Trojan</option>
+                        <option value="ss">Shadowsocks</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label for="sort-ping"><i class="fa-solid fa-sort"></i> مرتب‌سازی بر اساس پینگ:</label>
+                    <select id="sort-ping" onchange="applyFilters()">
+                        <option value="default">تصادفی (پیش‌فرض)</option>
+                        <option value="asc">کمترین به بیشترین (صعودی)</option>
+                        <option value="desc">بیشترین به کمترین (نزولی)</option>
+                    </select>
+                </div>
+                
+                <div class="control-group" style="margin-right: auto;">
+                    <span id="config-count" style="color: var(--accent-primary); font-weight: bold;">0</span> کانفیگ
+                </div>
+            </div>
         </header>
 
         <main class="grid" id="configs-grid">
-            <div class="loader"><i class="fa-solid fa-circle-notch fa-spin"></i> در حال دریافت کانفیگ‌ها...</div>
+            <div class="loader">
+                <i class="fa-solid fa-circle-notch fa-spin"></i>
+                <p>در حال دریافت و آنالیز کانفیگ‌ها...</p>
+            </div>
         </main>
     </div>
 
-    <div id="toast"><i class="fa-solid fa-check"></i> کپی شد!</div>
+    <div id="toast"><i class="fa-solid fa-bolt"></i> <span id="toast-msg">انجام شد!</span></div>
 
     <script>
-        // دیکشنری پرچم‌ها بر اساس نام کشورها در کانفیگ
         const flags = {
             'ir': '🇮🇷', 'iran': '🇮🇷', 'tehran': '🇮🇷',
             'de': '🇩🇪', 'germany': '🇩🇪',
@@ -295,37 +415,31 @@
             'ru': '🇷🇺', 'russia': '🇷🇺'
         };
 
-        // دیتای تستی در صورت عدم دسترسی به فایل configs.txt (برای پیش‌نمایش لوکال)
         const fallbackData = [
             "vless://1a2b3c4d@192.168.1.1:443?encryption=none&security=tls&type=tcp#Germany-Premium-01",
             "vmess://ew0KICAidiI6ICIyIiwNCiAgInBzIjogIk5ldGhlcmxhbmRzLUZhc3QiLA0KICAiYWRkIjogIjE5Mi4xNjguMS4yIiwNCiAgInBvcnQiOiAiNDQzIg0KfQ==",
             "trojan://myPassword@192.168.1.3:443?security=tls#US-Gaming-Server",
-            "vless://987654321@192.168.1.4:80?encryption=none&security=none#Turkey-Relay"
+            "ss://YWVzLTEyOC1nY206dGVzdA==@192.168.1.5:8080#UK-Relay"
         ];
 
         let allConfigsRaw = "";
+        let parsedConfigs = []; // نگهداری دیتای پردازش شده برای سورت و فیلتر سریع
 
-        // تابع تشخیص پرچم از روی اسم کانفیگ
         function getFlag(remark) {
             const lowerRemark = remark.toLowerCase();
             for (const [key, flag] of Object.entries(flags)) {
-                if (lowerRemark.includes(key)) {
-                    return flag;
-                }
+                if (lowerRemark.includes(key)) return flag;
             }
-            return '🌍'; // پرچم پیش‌فرض
+            return '🌍';
         }
 
-        // استخراج نام کانفیگ
         function extractRemark(url, protocol) {
             try {
                 if(protocol === 'vmess') {
-                    // دیکد کردن vmess بیس 64
                     const base64Data = url.replace('vmess://', '');
                     const decoded = JSON.parse(atob(base64Data));
                     return decoded.ps || 'VMess Server';
                 } else {
-                    // برای vless و trojan
                     const decodedUrl = decodeURIComponent(url);
                     const match = decodedUrl.match(/#(.+)$/);
                     return match ? match[1] : 'سرور ناشناس';
@@ -335,52 +449,101 @@
             }
         }
 
-        // تولید عدد پینگ تصادفی (صرفاً برای زیبایی بصری تا زمان راه‌اندازی بک‌اند)
-        function getRandomPing() {
-            return Math.floor(Math.random() * (250 - 40 + 1)) + 40;
+        // شبیه‌ساز پینگ (در حالت واقعی باید از سمت سرور بیاد)
+        function generatePing() {
+            return Math.floor(Math.random() * (350 - 40 + 1)) + 40;
         }
 
-        // رندر کردن کارت‌ها
-        function renderConfigs(configsText) {
+        // پردازش اولیه دیتا
+        function processData(text) {
+            const configsList = text.split('\n').filter(line => line.trim() !== '');
+            allConfigsRaw = configsList.join('\n');
+            
+            parsedConfigs = [];
+            configsList.forEach(config => {
+                const protocol = config.split('://')[0].toLowerCase();
+                if(!['vless', 'vmess', 'trojan', 'ss'].includes(protocol)) return;
+                
+                parsedConfigs.push({
+                    raw: config,
+                    protocol: protocol,
+                    remark: extractRemark(config, protocol),
+                    ping: generatePing()
+                });
+            });
+            
+            applyFilters(); // اعمال فیلترها و رندر اولیه
+        }
+
+        // اعمال فیلتر و سورت
+        function applyFilters() {
+            const filterType = document.getElementById('filter-type').value;
+            const sortType = document.getElementById('sort-ping').value;
+            const grid = document.getElementById('configs-grid');
+            
+            // افکت محو شدن قبل از تغییر محتوا
+            grid.style.opacity = '0';
+            
+            setTimeout(() => {
+                let filtered = parsedConfigs;
+
+                // فیلتر نوع
+                if (filterType !== 'all') {
+                    filtered = parsedConfigs.filter(c => c.protocol === filterType);
+                }
+
+                // سورت پینگ
+                if (sortType === 'asc') {
+                    filtered.sort((a, b) => a.ping - b.ping);
+                } else if (sortType === 'desc') {
+                    filtered.sort((a, b) => b.ping - a.ping);
+                } else {
+                    // شافل کردن برای حالت پیش‌فرض
+                    filtered = filtered.sort(() => Math.random() - 0.5);
+                }
+
+                document.getElementById('config-count').innerText = filtered.length;
+                renderCards(filtered);
+                
+                grid.style.opacity = '1';
+            }, 300); // همگام با زمان انیمیشن css
+        }
+
+        // رندر کردن کارت‌ها در DOM
+        function renderCards(configsArray) {
             const grid = document.getElementById('configs-grid');
             grid.innerHTML = '';
-            
-            const configsList = configsText.split('\n').filter(line => line.trim() !== '');
-            allConfigsRaw = configsList.join('\n'); // ذخیره برای سابسکریپشن
 
-            if(configsList.length === 0) {
-                grid.innerHTML = `<div class="empty-state"><h3>هیچ کانفیگی یافت نشد!</h3></div>`;
+            if(configsArray.length === 0) {
+                grid.innerHTML = `<div class="empty-state"><h3>کانفیگی با این مشخصات یافت نشد!</h3></div>`;
                 return;
             }
 
-            configsList.forEach(config => {
-                const protocol = config.split('://')[0].toLowerCase();
-                if(!['vless', 'vmess', 'trojan'].includes(protocol)) return;
-
-                const remark = extractRemark(config, protocol);
-                const flag = getFlag(remark);
-                const ping = getRandomPing();
+            configsArray.forEach((config, index) => {
+                const flag = getFlag(config.remark);
                 
-                // تعیین رنگ پینگ
                 let pingColor = 'var(--success)';
-                if(ping > 150) pingColor = '#f59e0b'; // نارنجی
-                if(ping > 250) pingColor = 'var(--accent-secondary)'; // قرمز
+                if(config.ping > 150) pingColor = 'var(--warning)';
+                if(config.ping > 250) pingColor = 'var(--accent-secondary)';
 
                 const card = document.createElement('div');
                 card.className = 'card';
+                // اعمال تاخیر در انیمیشن ورود برای ایجاد افکت آبشاری
+                card.style.animationDelay = `${index * 0.05}s`;
+                
                 card.innerHTML = `
                     <div class="card-header">
-                        <span class="badge ${protocol}">${protocol}</span>
+                        <span class="badge ${config.protocol}">${config.protocol}</span>
                         <span class="flag-icon">${flag}</span>
                     </div>
-                    <div class="card-title" title="${remark}">${remark}</div>
+                    <div class="card-title" title="${config.remark}">${config.remark}</div>
                     <div class="card-stats">
                         <div class="ping" style="color: ${pingColor}">
-                            <div class="ping-dot" style="background-color: ${pingColor}; box-shadow: 0 0 8px ${pingColor}"></div>
-                            ${ping} ms
+                            <div class="ping-dot" style="background-color: ${pingColor}; color: ${pingColor}"></div>
+                            ${config.ping} <span style="font-size:0.8em; opacity:0.7">ms</span>
                         </div>
-                        <button class="copy-btn" onclick="copyToClipboard('${config}')" title="کپی کانفیگ">
-                            <i class="fa-regular fa-copy"></i>
+                        <button class="copy-btn" onclick="copyToClipboard('${config.raw}')" title="کپی کانفیگ">
+                            <i class="fa-solid fa-copy"></i>
                         </button>
                     </div>
                 `;
@@ -388,49 +551,42 @@
             });
         }
 
-        // دریافت کانفیگ‌ها از فایل
         async function fetchConfigs() {
             try {
-                // تلاش برای خواندن فایلی که توسط پایتون ساخته می‌شود
                 const response = await fetch('configs.txt');
                 if (!response.ok) throw new Error('فایل پیدا نشد');
                 const text = await response.text();
-                renderConfigs(text);
+                processData(text);
             } catch (error) {
                 console.log("استفاده از دیتای جایگزین (نسخه پیش‌نمایش)");
-                renderConfigs(fallbackData.join('\n'));
+                processData(fallbackData.join('\n'));
             }
         }
 
-        // کپی متن
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
                 showToast("کانفیگ کپی شد!");
             });
         }
 
-        // کپی لینک سابسکریپشن
         function copySubscription() {
-            // در حالت واقعی، آدرس صفحه گیت‌هاب پیج شما + configs.txt ساب شماست
-            const currentUrl = window.location.href.replace('index.html', '');
+            const currentUrl = window.location.href.replace('index.html', '').split('?')[0].split('#')[0];
             const subLink = currentUrl + 'configs.txt';
             
             navigator.clipboard.writeText(subLink).then(() => {
-                showToast("لینک سابسکریپشن شما کپی شد!");
+                showToast("لینک سابسکریپشن شخصی کپی شد!");
             });
         }
 
-        // نمایش پیغام توست
         function showToast(message) {
             const toast = document.getElementById('toast');
-            toast.innerHTML = `<i class="fa-solid fa-check"></i> ${message}`;
+            document.getElementById('toast-msg').innerText = message;
             toast.classList.add('show');
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 3000);
         }
 
-        // اجرا هنگام لود صفحه
         window.onload = fetchConfigs;
     </script>
 </body>
