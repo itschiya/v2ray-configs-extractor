@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>کانفیگ‌های V2Ray</title>
+    <style>
+        body { background-color: #1a1a2e; color: #0f3460; font-family: Tahoma, sans-serif; padding: 20px; }
+        h1 { color: #e94560; }
+        textarea { width: 100%; height: 300px; background: #16213e; color: #00ffcc; padding: 10px; border: 1px solid #0f3460; }
+    </style>
+</head>
+<body>
+    <h1>لیست کانفیگ‌های استخراج شده</h1>
+    <p>این لیست هر ۱۲ ساعت آپدیت می‌شود.</p>
+    <textarea id="configBox" readonly>در حال بارگذاری...</textarea>
+
+    <script>
+        // خوندن فایل کانفیگ‌ها و نمایش اون در صفحه
+        fetch('configs.txt')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('configBox').value = data;
+            })
+            .catch(error => {
+                document.getElementById('configBox').value = "خطا در بارگذاری کانفیگ‌ها!";
+            });
+    </script>
+</body>
+</html>
