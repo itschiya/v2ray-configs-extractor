@@ -1,6 +1,7 @@
 import requests
 import re
 import base64
+import random
 from concurrent.futures import ThreadPoolExecutor
 
 def extract_configs(text):
@@ -69,11 +70,21 @@ def main():
         print("\nهیچ کانفیگی پیدا نشد!")
         return
 
-    print(f"\n{len(all_configs)} کانفیگ با موفقیت استخراج شد.")
+    # تبدیل set به لیست برای انجام عملیات
+    config_list = list(all_configs)
     
-    # 3. ذخیره مستقیم در فایل configs.txt برای گیت‌هاب اکشن
+    print(f"\nمجموعا {len(config_list)} کانفیگ استخراج شد.")
+    
+    # 3. محدود کردن خروجی به 50 کانفیگ
+    # برای تنوع، لیست رو به هم می‌ریزیم تا هر بار 50 کانفیگ مختلف انتخاب بشه
+    random.shuffle(config_list)
+    final_configs = config_list[:50]
+    
+    print(f"تعداد {len(final_configs)} کانفیگ نهایی برای ذخیره انتخاب شد.")
+    
+    # 4. ذخیره مستقیم در فایل configs.txt برای گیت‌هاب اکشن
     with open('configs.txt', 'w', encoding='utf-8') as f:
-        for c in all_configs:
+        for c in final_configs:
             f.write(c + '\n')
             
     print("فایل configs.txt آپدیت شد.")
